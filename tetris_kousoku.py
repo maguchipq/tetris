@@ -5,8 +5,8 @@ import copy
 # --- 1. 定数とテトリミノの定義 ---
 
 # ゲーム設定
-CELL_SIZE = 30  # 1セルの大きさ (ピクセル)
-BOARD_WIDTH = 10  # 横のセル数
+CELL_SIZE = 30 # 1セルの大きさ (ピクセル)
+BOARD_WIDTH = 10 # 横のセル数
 BOARD_HEIGHT = 20 # 縦のセル数
 FALL_SPEED_MS = 1000 # 落下間隔（ミリ秒）
 
@@ -201,7 +201,7 @@ class TetrisGame:
                     
                     # ボードの境界外 (Yが負の領域) のブロックは無視
                     if 0 <= board_y < BOARD_HEIGHT:
-                        self.board[board_y][board_x] = shape[r][c]
+                        self.board[board_y][board_x] = color_index
 
         self.clear_lines()
         self.new_piece() # 新しいテトリミノを生成
