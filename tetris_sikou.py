@@ -9,7 +9,7 @@ SPEED = 500        # 落下速度 (ミリ秒)
 
 # テトリミノの形状定義 (中心からの相対座標)
 SHAPES = [
-    [(-1, 0), (0, 0), (1, 0), (2, 0)],   # I (水色)
+    [(-1, 0), (0, 0), (1, 0), (2, 0)],  # I (水色)
     [(-1, -1), (-1, 0), (0, 0), (1, 0)], # J (青)
     [(1, -1), (-1, 0), (0, 0), (1, 0)],  # L (オレンジ)
     [(0, 0), (1, 0), (0, 1), (1, 1)],    # O (黄色)
@@ -68,7 +68,10 @@ class TetrisGame:
         # 出現直後に衝突していたらゲームオーバー
         if self.check_collision(self.current_piece, self.piece_x, self.piece_y):
             self.game_over = True
-            # ここでの描画は draw_board で消されてしまうため削除し、draw_board 側に移動しました
+            self.canvas.create_text(
+                self.canvas_width // 2, self.canvas_height // 2,
+                text="GAME OVER", fill="white", font=("Arial", 24, "bold")
+            )
 
     def check_collision(self, shape, offset_x, offset_y):
         """衝突判定 (壁、床、他のブロック)"""
@@ -145,13 +148,6 @@ class TetrisGame:
         if self.current_piece and not self.game_over:
             for x, y in self.current_piece:
                 self.draw_block(self.piece_x + x, self.piece_y + y, self.current_color)
-        
-        # ゲームオーバー時の表示 (修正箇所: 最後に描画することで上書きを防ぐ)
-        if self.game_over:
-            self.canvas.create_text(
-                self.canvas_width // 2, self.canvas_height // 2,
-                text="GAME OVER", fill="white", font=("Arial", 24, "bold")
-            )
 
     def draw_block(self, x, y, color):
         """1つのブロックを描画する"""
